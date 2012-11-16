@@ -13,6 +13,7 @@ public class FractalActivity extends BasicActivity {
 	float start = 0.0f;
 	float stop = 0.0f;
 	FCanvas canvas;
+	boolean moved = false;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,11 @@ public class FractalActivity extends BasicActivity {
 		
 		if (action == MotionEvent.ACTION_MOVE) {
 
-			if (start == 0.0f) {
+		    if(moved == true) {
+		        return true;
+		    }
+		    
+		    if (start == 0.0f) {
 				start = event.getRawX();
 			}
 
@@ -42,6 +47,8 @@ public class FractalActivity extends BasicActivity {
 
 			if (Math.abs(start - stop) > 16 && start < stop) {
 
+			    moved = true;
+			    
 				Intent intent = new Intent(this, MainActivity.class);
 
 				startActivity(intent);
@@ -50,11 +57,15 @@ public class FractalActivity extends BasicActivity {
 						R.anim.slide_in_right);
 
 				start = stop = 0.0f;
+				
+				return true;
 			}
+			
+			moved = false;
 		}
 
 		if (action == MotionEvent.ACTION_UP) {			
-			fractalView.invalidate();
+			fractalView.invalidate();			
 			start = stop = 0.0f;
 		}
 

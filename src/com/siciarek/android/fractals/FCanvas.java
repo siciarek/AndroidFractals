@@ -17,18 +17,19 @@ public class FCanvas implements Drawable {
 		this.view.setBackgroundColor(Color.parseColor(background));
 		this.view.paint.setColor(Color.parseColor(foreground));
 		this.view.paint.setAntiAlias(true);
+        this.view.paint.setStyle(Style.STROKE);
 		this.view.paint.setStrokeWidth(2.0f);
 	}
 
 	public void init(String style) {
 
-		if(style.equals("fill")) {
-			this.view.paint.setStyle(Style.FILL);
-		}
-		else
-		{
-			this.view.paint.setStyle(Style.STROKE);
-		}
+        if(style.equals("fill")) {
+            this.view.paint.setStyle(Style.FILL);
+        }
+
+        if(style.equals("point")) {
+            this.view.paint.setAntiAlias(false);
+        }
 	}
 	
 	public void updateTitle(String title) {
