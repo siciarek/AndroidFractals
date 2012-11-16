@@ -1,0 +1,3 @@
+# Adds Android application mime-type to Apache:
+
+AddType application/vnd.android.package-archive apk
